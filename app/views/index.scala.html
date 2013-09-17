@@ -1,0 +1,36 @@
+@(politicians: List[Politician], politicianForm: Form[Politician])
+
+@import helper._
+
+@main("Polltoad") {
+    
+    <h1>@politicians.size() politician(s)</h1>
+    
+    <ul>
+       Name &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; Constituency
+        @for(politician <- politicians) {
+            <li>
+                @politician.person.name
+                &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+                 @politician.constituency
+                
+                @form(routes.Application.deletePolitician(politician.id)) {
+                    <input type="submit" value="Delete">
+                }
+            </li>
+        }
+    </ul>
+    
+    <h2>Add a new politician</h2>
+    
+    @form(routes.Application.newPolitician()) {
+        
+        @inputText(politicianForm("Name")) 
+        
+        @inputText(politicianForm("Constituency")) 
+        
+        <input type="submit" value="Create">
+        
+    }
+    
+}
