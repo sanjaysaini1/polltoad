@@ -9,9 +9,10 @@ import javax.persistence.ManyToMany;
 import javax.persistence.OneToOne;
 
 import play.data.validation.Constraints.Required;
+import play.db.ebean.Model;
 
 @Entity
-public class Election {
+public class Election extends Model{
 
 	@Id
 	public Long id;
