@@ -1,0 +1,61 @@
+@(constituencies: List[Constituency],states: Map[String,String], constituencyForm: Form[Constituency])
+
+@import helper._ 
+
+@main("Polltoad-Constituency") {
+
+<div>
+<h1>@constituencies.size() Constituency(s)</h1>
+
+<table>
+
+   <th>
+	Name </th> <th> State</th><th>Type</th><th></th>
+	 @for(constituency <-	constituencies) {
+	 <tr>
+	 <td>
+	@constituency.name
+     </td>
+     <td>
+	    @constituency.state.name
+	 </td>
+	 <td>
+	 @if(constituency.parliament){
+	     Parliamentary
+	    }else{
+	     Assembly
+	    }
+	
+	 </td>
+	 <td>
+		@form(routes.Application.deleteConstituency(constituency.constituencyId)) { <input
+		type="submit" value="Delete"> }
+	</td>
+	</tr>}
+
+</table>
+</div>
+<div>
+<h2>Add a new constituency</h2>
+
+@form(routes.Application.newConstituency()) {
+
+
+<h2>Constituency</h2> 
+<div>
+
+	@inputText(constituencyForm("name"),'_label ->"Name",'_showConstraints -> false)
+	
+	@inputText(constituencyForm("population"),'_label ->"Voter Population",'_showConstraints -> false)
+
+    @select(constituencyForm("state.stateId"),options(states),'_label->"Choose State (*)")
+    
+   @checkbox(field=constituencyForm("parliament"),'_label ->"Parliamentary constituency")
+
+</div>
+
+<input type="submit" value="Create">
+
+} 
+}
+</div>

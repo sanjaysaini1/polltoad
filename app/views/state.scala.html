@@ -1,0 +1,45 @@
+@(states: List[State], stateForm: Form[State])
+
+@import helper._ 
+
+@main("Polltoad-State") {
+
+<div>
+<h1>@states.size() State(s) and UT(s)</h1>
+
+
+<table>
+   <th>Name</th><th></th>
+   
+	  @for(state <-	states) {
+	  <tr>
+	  <td>
+	@state.name
+	  </td>
+	  <td>
+		@form(routes.Application.deleteState(state.stateId)) { <input
+		type="submit" value="Delete"> }
+		</td>
+	</tr> }
+
+</table>
+</div>
+<div>
+<h2>Add a new state</h2>
+
+@form(routes.Application.newState()) {
+
+
+<h2>State</h2> 
+<div>
+	@inputText(stateForm("name"),'_label ->"Name",'_showConstraints -> false)
+
+   @checkbox(field=stateForm("ut"),'_label ->"UT")
+
+</div>
+
+<input type="submit" value="Create">
+
+} 
+}
+</div>

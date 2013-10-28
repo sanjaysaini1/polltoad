@@ -1,0 +1,70 @@
+@(politicians: List[Politician],constituencies: Map[String,String],politicalparties: Map[String,String], politicianForm: Form[Politician])
+
+@import helper._ 
+
+@main("Polltoad-Politician") {
+
+<h1>@politicians.size() politician(s)</h1>
+
+<table>
+	<th>Name </th><th> Date of Birth </th> <th>Place of Birth </th><th></th>
+	
+	@for(politician <- politicians) {
+	<tr>
+	<td>
+	@politician.person.name 
+	</td>
+	<td>
+		@politician.person.dateofbirth
+    </td>
+	<td>
+		@politician.person.placeofbirth
+    </td>
+    <td>
+		@form(routes.Application.deletePolitician(politician.politicianId)) { <input
+		type="submit" value="Delete"> }
+		</td>
+	</tr> }
+</table>
+
+<h2>Add a new politician</h2>
+
+@form(routes.Application.newPolitician()) {
+
+
+<h2>Personal Details</h2> 
+<div>
+	@inputText(politicianForm("person.name"),'_label ->"Name",'_showConstraints -> false)
+
+   	@inputDate(politicianForm("person.dateofbirth"),'_label -> "Date of Birth",'_showConstraints -> false,'format->"dd/MM/yyyy")
+
+	@inputText(politicianForm("person.placeofbirth"),'_label -> "Place of Birth",'_showConstraints -> true)
+
+</div>
+
+<h2>Current Constituency</h2> 
+<div>
+    @select(politicianForm("constituency.constituencyId"),options(constituencies),'_label->"Choose Constituency (*)")
+</div>
+
+<h2>Current Political Party</h2>
+<div> 
+	 @select(politicianForm("currentpoliticalparty.politicalpartyId"),options(politicalparties),'_label->"Choose Current Political Party (*)")
+</div>
+
+<h2>Education</h2>
+<div> 
+	@inputText(politicianForm("education.education"),'_label ->"Qualification",'_showConstraints -> false)
+
+</div>
+
+<h2>Profession</h2>
+<div> 
+	@inputText(politicianForm("profession.profession"),'_label ->"Profession",'_showConstraints -> false)
+</div>
+
+
+<input type="submit" value="Create">
+
+} 
+}

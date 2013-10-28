@@ -1,0 +1,48 @@
+@(politicalparties: List[PoliticalParty], politicalpartyForm: Form[PoliticalParty])
+
+@import helper._ 
+
+@main("Polltoad-Political Party") {
+<div>
+<h1>@politicalparties.size() Political Party(s)</h1>
+
+<table>
+    <th>
+	Name 
+	</th>
+	<th></th>
+	
+	@for(politicalparty <- politicalparties) {
+	<tr>
+	<td>
+	@politicalparty.name
+	</td>   
+	<td>
+		@form(routes.Application.deletePoliticalparty(politicalparty.politicalPartyId)) { <input
+		type="submit" value="Delete"> }
+	</td>
+	 </tr>
+	 }
+	
+</table>
+</div>
+<div>
+<h2>Add a new Political Party</h2>
+
+@form(routes.Application.newPoliticalparty()) {
+
+
+<h2>Political Party</h2> 
+<div>
+	@inputText(politicalpartyForm("name"),'_label ->"Name",'_showConstraints -> false)
+	
+    @inputDate(politicalpartyForm("dateofformation"),'_label ->"Date of Formation",'_showConstraints -> false)
+   
+
+</div>
+
+<input type="submit" value="Create">
+
+} 
+}
+</div>

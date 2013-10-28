@@ -2,8 +2,10 @@ package models;
 
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
@@ -15,39 +17,45 @@ import play.db.ebean.Model;
 public class Politician extends Model {
 
 	@Id
-	public Long id;
+	public Long politicianId;
+
 	@Required
-	@OneToOne
+	@OneToOne(cascade = CascadeType.ALL, orphanRemoval = true)
+	@JoinColumn(name = "personId")
 	public Person person;
 
-	@ManyToMany
+	@ManyToMany(cascade = CascadeType.ALL)
 	public List<Constituency> constituency;
-	
-	@ManyToOne
+
+	@ManyToOne(cascade = CascadeType.ALL)
+	@JoinColumn(name = "constituencyId")
 	public Constituency currentconstituency;
 
-	@ManyToMany
+	@ManyToMany(cascade = CascadeType.ALL)
 	public List<Election> electionsfaught;
 
-	@ManyToMany
+	@ManyToMany(cascade = CascadeType.ALL)
 	public List<PoliticalParty> politicalparties;
 
-	@ManyToOne
+	@ManyToOne(cascade = CascadeType.ALL)
+	@JoinColumn(name = "politicalPartyId")
 	public PoliticalParty currentpoliticalparty;
 
-	@ManyToOne
+	@ManyToOne(cascade = CascadeType.ALL)
+	@JoinColumn(name = "educationId")
 	public Education education;
 
-	@ManyToOne
+	@ManyToOne(cascade = CascadeType.ALL)
+	@JoinColumn(name = "familyId")
 	public Family family;
 
-	@ManyToOne
+	@ManyToOne(cascade = CascadeType.ALL)
+	@JoinColumn(name = "professionId")
 	public Profession profession;
-	
-	@OneToOne
-	public Media media;
-	
-	public static Finder<Long, Politician> find = new Finder(Long.class, Politician.class);
+
+
+	public static Finder<Long, Politician> find = new Finder(Long.class,
+			Politician.class);
 
 	public static List<Politician> all() {
 		return find.all();
@@ -55,11 +63,29 @@ public class Politician extends Model {
 
 	public static void create(Politician politician) {
 
+		System.out.println(politician.toString());
+		// politician.person.save();
 		politician.save();
 	}
 
 	public static void delete(Long id) {
 		find.ref(id).delete();
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see java.lang.Object#toString()
+	 */
+	@Override
+	public String toString() {
+		return "Politician [id=" + politicianId + ", person=" + person
+				+ ", constituency=" + constituency + ", currentconstituency="
+				+ currentconstituency + ", electionsfaught=" + electionsfaught
+				+ ", politicalparties=" + politicalparties
+				+ ", currentpoliticalparty=" + currentpoliticalparty
+				+ ", education=" + education + ", family=" + family
+				+ ", profession=" + profession + "]";
 	}
 
 }

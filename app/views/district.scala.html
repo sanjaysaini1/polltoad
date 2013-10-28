@@ -1,0 +1,49 @@
+@(districts: List[District],states: Map[String,String], districtForm: Form[District])
+
+@import helper._ 
+
+@main("Polltoad-Districts") {
+
+<div>
+<h1>@districts.size() Districts(s)</h1>
+
+<table>
+
+   <th>
+	Name </th> <th> State</th><th></th>
+	 @for(district <-	districts) {
+	 <tr>
+	 <td>
+	@district.name
+     </td>
+     <td>
+	    @district.state.name
+	 </td>
+	 <td>
+		@form(routes.Application.deleteDistrict(district.districtId)) { <input
+		type="submit" value="Delete"> }
+	</td>
+	</tr>}
+
+</table>
+</div>
+<div>
+<h2>Add a new district</h2>
+
+@form(routes.Application.newDistrict()) {
+
+
+<h2>District</h2> 
+<div>
+
+	@inputText(districtForm("name"),'_label ->"Name",'_showConstraints -> false)
+
+    @select(districtForm("state.stateId"),options(states),'_label->"Choose State (*)")
+
+</div>
+
+<input type="submit" value="Create">
+
+} 
+}
+</div>
