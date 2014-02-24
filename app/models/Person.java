@@ -2,7 +2,6 @@ package models;
 
 import java.net.URL;
 import java.text.DateFormat;
-import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
@@ -49,15 +48,11 @@ public class Person extends Model {
 	}
 	
 	public String formattedDOB(){
-		
-			System.out.println("formatting date....");
 			
 		    DateFormat df = new SimpleDateFormat("dd-MM-yyyy");
 		    String s = df.format(this.dateofbirth);
 		    
-		    
 		    return s;
-		
 	}
 
 }

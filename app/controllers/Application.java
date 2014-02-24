@@ -2,7 +2,6 @@ package controllers;
 
 import java.text.ParseException;
 import java.util.Locale;
-import java.util.logging.SimpleFormatter;
 
 import models.Constituency;
 import models.District;
