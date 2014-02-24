@@ -1,3 +1,4 @@
+ALTER TABLE political_party AUTO_INCREMENT = 1;
 INSERT INTO political_party( name) VALUES ('Bahujan Samaj Party' );
 INSERT INTO political_party( name) VALUES ('Communist Party of India' );
 INSERT INTO political_party( name) VALUES ('Communist Party of India (Marxist)' );
@@ -42,7 +43,6 @@ INSERT INTO political_party( name) VALUES ('Peoples Party of Arunachal' );
 INSERT INTO political_party( name) VALUES ('Rashtriya Janata Dal' );
 INSERT INTO political_party( name) VALUES ('Rashtriya Lok Dal' );
 INSERT INTO political_party( name) VALUES ('Revolutionary Socialist Party' );
-INSERT INTO political_party( name) VALUES ('Samajwadi Party' );
 INSERT INTO political_party( name) VALUES ('Shiromani Akali Dal' );
 INSERT INTO political_party( name) VALUES ('Shiv Sena' );
 INSERT INTO political_party( name) VALUES ('Sikkim Democratic Front' );
@@ -50,3 +50,5 @@ INSERT INTO political_party( name) VALUES ('Telangana Rashtra Samithi' );
 INSERT INTO political_party( name) VALUES ('Telugu Desam Party' );
 INSERT INTO political_party( name) VALUES ('United Democratic Party' );
 INSERT INTO political_party( name) VALUES ('Zoram Nationalist Party' );
+INSERT INTO political_party( name) VALUES ('Indian National Congress' );
+INSERT INTO political_party( name) VALUES ('Bhartiya Janta Party' );

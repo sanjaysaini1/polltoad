@@ -1,3 +1,4 @@
+ALTER TABLE district AUTO_INCREMENT = 1;
 insert into district(name,stateId) values ('North Andaman', (select state_id from state where name like 'Andaman and Nicobar Islands'));
 insert into district(name,stateId) values ('South Andaman', (select state_id from state where name like 'Andaman and Nicobar Islands'));
 insert into district(name,stateId) values ('Nicobar', (select state_id from state where name like 'Andaman and Nicobar Islands'));

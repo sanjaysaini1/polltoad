@@ -1,16 +1,21 @@
 @(constituencies: List[Constituency],states: Map[String,String], constituencyForm: Form[Constituency])
 
 @import helper._ 
+@import helper.twitterBootstrap._
 
 @main("Polltoad-Constituency") {
+<ul class="nav nav-pills">
+  <li class="active"><a href="#tablediv" data-toggle="tab">Districts</a></li>
+  <li><a href="#adddiv" data-toggle="tab">Add</a></li>
+</ul>
+<div id='content' class="tab-content">
+<div class="tab-pane active" id="tablediv">
+<h2>@constituencies.size Constituency(s)</h2>
 
-<div>
-<h1>@constituencies.size() Constituency(s)</h1>
-
-<table>
+<table class="table">
 
    <th>
-	Name </th> <th> State</th><th>Type</th><th></th>
+	Name </th> <th> State</th><th>Type</th><th>Remove</th>
 	 @for(constituency <-	constituencies) {
 	 <tr>
 	 <td>
@@ -35,13 +40,10 @@
 
 </table>
 </div>
-<div>
+<div  class="tab-pane" id="adddiv">
 <h2>Add a new constituency</h2>
 
 @form(routes.Application.newConstituency()) {
-
-
-<h2>Constituency</h2> 
 <div>
 
 	@inputText(constituencyForm("name"),'_label ->"Name",'_showConstraints -> false)
@@ -58,4 +60,5 @@
 
 } 
 }
+</div>
 </div>

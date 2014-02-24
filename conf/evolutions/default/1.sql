@@ -75,8 +75,8 @@ create table political_party (
 create table politician (
   politician_id             bigint auto_increment not null,
   personId                  bigint,
-  constituencyId            bigint,
-  politicalPartyId          bigint,
+  currentconstituency_constituency_id bigint,
+  currentpoliticalparty_political_party_id bigint,
   educationId               bigint,
   familyId                  bigint,
   professionId              bigint,
@@ -86,7 +86,6 @@ create table politician (
 create table profession (
   profession_id             bigint auto_increment not null,
   profession                varchar(255),
-  constraint uq_profession_profession unique (profession),
   constraint pk_profession primary key (profession_id))
 ;
 
@@ -150,10 +149,10 @@ alter table political_party add constraint fk_political_party_partychief_4 forei
 create index ix_political_party_partychief_4 on political_party (politicianId);
 alter table politician add constraint fk_politician_person_5 foreign key (personId) references person (person_id) on delete restrict on update restrict;
 create index ix_politician_person_5 on politician (personId);
-alter table politician add constraint fk_politician_currentconstituency_6 foreign key (constituencyId) references constituency (constituency_id) on delete restrict on update restrict;
-create index ix_politician_currentconstituency_6 on politician (constituencyId);
-alter table politician add constraint fk_politician_currentpoliticalparty_7 foreign key (politicalPartyId) references political_party (political_party_id) on delete restrict on update restrict;
-create index ix_politician_currentpoliticalparty_7 on politician (politicalPartyId);
+alter table politician add constraint fk_politician_currentconstituency_6 foreign key (currentconstituency_constituency_id) references constituency (constituency_id) on delete restrict on update restrict;
+create index ix_politician_currentconstituency_6 on politician (currentconstituency_constituency_id);
+alter table politician add constraint fk_politician_currentpoliticalparty_7 foreign key (currentpoliticalparty_political_party_id) references political_party (political_party_id) on delete restrict on update restrict;
+create index ix_politician_currentpoliticalparty_7 on politician (currentpoliticalparty_political_party_id);
 alter table politician add constraint fk_politician_education_8 foreign key (educationId) references education (education_id) on delete restrict on update restrict;
 create index ix_politician_education_8 on politician (educationId);
 alter table politician add constraint fk_politician_family_9 foreign key (familyId) references family (family_id) on delete restrict on update restrict;

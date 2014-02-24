@@ -3,17 +3,31 @@
 @import helper._ 
 
 @main("Polltoad-Political Party") {
-<div>
-<h1>@politicalparties.size() Political Party(s)</h1>
+	<ul class="nav nav-pills">
+  <li class="active"><a href="#tablediv" data-toggle="tab">Political Parties</a></li>
+  <li><a href="#adddiv" data-toggle="tab">Add</a></li>
+  
+</ul>
+<div id='content' class="tab-content">
+<div class="tab-pane active" id="tablediv">
+<h2>@politicalparties.size Political Party(s)</h2>
 
-<table>
+<table class="table">
+	<th>
+	#
+	</th>
     <th>
 	Name 
 	</th>
-	<th></th>
+	<th>
+	Remove
+	</th>
 	
 	@for(politicalparty <- politicalparties) {
 	<tr>
+	<td>
+	@politicalparty.politicalPartyId
+	</td>  
 	<td>
 	@politicalparty.name
 	</td>   
@@ -26,18 +40,16 @@
 	
 </table>
 </div>
-<div>
+<div class="tab-pane" id="adddiv">
 <h2>Add a new Political Party</h2>
 
 @form(routes.Application.newPoliticalparty()) {
 
-
-<h2>Political Party</h2> 
 <div>
 	@inputText(politicalpartyForm("name"),'_label ->"Name",'_showConstraints -> false)
 	
     @inputDate(politicalpartyForm("dateofformation"),'_label ->"Date of Formation",'_showConstraints -> false)
-   
+    
 
 </div>
 
@@ -45,4 +57,5 @@
 
 } 
 }
+</div>
 </div>

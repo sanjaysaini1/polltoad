@@ -4,19 +4,16 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.UniqueConstraint;
 
 import play.data.validation.Constraints.Required;
 import play.db.ebean.Model;
-import play.db.ebean.Model.Finder;
 
 @Entity
 @Table(uniqueConstraints = @UniqueConstraint(columnNames = { "name", "stateId","parliament" }))
@@ -37,9 +34,9 @@ public class Constituency extends Model {
 	@JoinColumn(name = "stateId")
 	public State state;
 
-	public boolean parliament = true;
+	public boolean parliament ;
 	
-	public static Finder<Long, Constituency> find = new Finder(Long.class,
+	public static Finder<Long, Constituency> find = new Finder<Long, Constituency>(Long.class,
 			Constituency.class);
 
 	public static List<Constituency> all() {

@@ -1,6 +1,7 @@
 package models;
 
 import java.util.List;
+import java.util.logging.SimpleFormatter;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
@@ -10,6 +11,7 @@ import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 
+import play.data.format.Formatters;
 import play.data.validation.Constraints.Required;
 import play.db.ebean.Model;
 
@@ -27,8 +29,7 @@ public class Politician extends Model {
 	@ManyToMany(cascade = CascadeType.ALL)
 	public List<Constituency> constituency;
 
-	@ManyToOne(cascade = CascadeType.ALL)
-	@JoinColumn(name = "constituencyId")
+	@ManyToOne
 	public Constituency currentconstituency;
 
 	@ManyToMany(cascade = CascadeType.ALL)
@@ -37,9 +38,8 @@ public class Politician extends Model {
 	@ManyToMany(cascade = CascadeType.ALL)
 	public List<PoliticalParty> politicalparties;
 
-	@ManyToOne(cascade = CascadeType.ALL)
-	@JoinColumn(name = "politicalPartyId")
-	public PoliticalParty currentpoliticalparty;
+	@ManyToOne
+	public  PoliticalParty currentpoliticalparty;
 
 	@ManyToOne(cascade = CascadeType.ALL)
 	@JoinColumn(name = "educationId")
@@ -49,7 +49,7 @@ public class Politician extends Model {
 	@JoinColumn(name = "familyId")
 	public Family family;
 
-	@ManyToOne(cascade = CascadeType.ALL)
+	@ManyToOne(cascade = CascadeType.MERGE)
 	@JoinColumn(name = "professionId")
 	public Profession profession;
 
@@ -71,7 +71,7 @@ public class Politician extends Model {
 	public static void delete(Long id) {
 		find.ref(id).delete();
 	}
-
+	
 	/*
 	 * (non-Javadoc)
 	 * 

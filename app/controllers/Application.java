@@ -1,11 +1,16 @@
 package controllers;
 
+import java.text.ParseException;
+import java.util.Locale;
+import java.util.logging.SimpleFormatter;
+
 import models.Constituency;
 import models.District;
 import models.PoliticalParty;
 import models.Politician;
 import models.State;
 import play.data.Form;
+import play.data.format.Formatters;
 import play.mvc.Controller;
 import play.mvc.Result;
 
@@ -23,10 +28,30 @@ public class Application extends Controller {
 
 	// politician
 	public static Result politicians() {
+		
 		return ok(views.html.politician.render(Politician.all(), Constituency.allMap(),PoliticalParty.allMap(),politicianForm));
 	}
 
 	public static Result newPolitician() {
+		Formatters.register(PoliticalParty.class, new Formatters.SimpleFormatter<PoliticalParty>() {
+
+			@Override
+			public PoliticalParty parse(String arg0, Locale arg1)
+					throws ParseException {
+				// TODO Auto-generated method stub
+				PoliticalParty currentpoliticalParty=PoliticalParty.find.byId(new Long(arg0));
+				
+				return currentpoliticalParty;
+			}
+
+			@Override
+			public String print(PoliticalParty politicalParty, Locale arg1) {
+				// TODO Auto-generated method stub
+				return politicalParty.politicalPartyId.toString();
+			}
+		});
+		
+		
 		Form<Politician> filledForm = politicianForm.bindFromRequest();
 		if (filledForm.hasErrors()) {
 			return badRequest(views.html.politician.render(Politician.all(), Constituency.allMap(),PoliticalParty.allMap(),filledForm));

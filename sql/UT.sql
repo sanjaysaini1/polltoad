@@ -1,3 +1,4 @@
+ALTER TABLE state AUTO_INCREMENT = 1;
 INSERT INTO state( name, ut) VALUES ('Andaman and Nicobar Islands',1);
 INSERT INTO state( name, ut) VALUES ('Chandigarh',1);
 INSERT INTO state( name, ut) VALUES ('Dadra and Nagar Haveli',1);

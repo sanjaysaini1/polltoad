@@ -14,7 +14,6 @@ public class Profession extends Model {
 	public Long professionId;
 
 	@Required
-	@Column(unique = true)
 	public String profession;
 
 	/*

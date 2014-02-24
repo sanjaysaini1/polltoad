@@ -1,3 +1,5 @@
+ALTER TABLE constituency AUTO_INCREMENT = 1;
+
 INSERT INTO constituency ( name, population, stateId, parliament) VALUES('Adilabad', 500000, (select state_id from state where name like 'Andhra Pradesh'), 1);
 INSERT INTO constituency ( name, population, stateId, parliament) VALUES('Peddapalli', 500000, (select state_id from state where name like 'Andhra Pradesh'), 1);
 INSERT INTO constituency ( name, population, stateId, parliament) VALUES('Karimnagar', 500000, (select state_id from state where name like 'Andhra Pradesh'), 1);
@@ -176,7 +178,6 @@ INSERT INTO constituency ( name, population, stateId, parliament) VALUES('Pathan
 INSERT INTO constituency ( name, population, stateId, parliament) VALUES('Kollam', 500000, (select state_id from state where name like 'Kerala'), 1);
 INSERT INTO constituency ( name, population, stateId, parliament) VALUES('Attingal', 500000, (select state_id from state where name like 'Kerala'), 1);
 INSERT INTO constituency ( name, population, stateId, parliament) VALUES('Thiruvananthapuram', 500000, (select state_id from state where name like 'Kerala'), 1);
-INSERT INTO constituency ( name, population, stateId, parliament) VALUES('', 500000, (select state_id from state where name like 'Madhya Pradesh'), 1);
 INSERT INTO constituency ( name, population, stateId, parliament) VALUES('Morena', 500000, (select state_id from state where name like 'Madhya Pradesh'), 1);
 INSERT INTO constituency ( name, population, stateId, parliament) VALUES('Bhind', 500000, (select state_id from state where name like 'Madhya Pradesh'), 1);
 INSERT INTO constituency ( name, population, stateId, parliament) VALUES('Gwalior', 500000, (select state_id from state where name like 'Madhya Pradesh'), 1);
@@ -535,5 +536,4 @@ INSERT INTO constituency ( name, population, stateId, parliament) VALUES('Chandi
 INSERT INTO constituency ( name, population, stateId, parliament) VALUES('Dadra and Nagar Haveli', 500000, (select state_id from state where name like 'Dadra and Nagar Haveli'), 1);
 INSERT INTO constituency ( name, population, stateId, parliament) VALUES('Daman and Diu', 500000, (select state_id from state where name like 'Daman and Diu'), 1);
 INSERT INTO constituency ( name, population, stateId, parliament) VALUES('Lakshadweep', 500000, (select state_id from state where name like 'Lakshdweep'), 1);
-INSERT INTO constituency ( name, population, stateId, parliament) VALUES('', 500000, (select state_id from state where name like 'Puducherry'), 1);
 INSERT INTO constituency ( name, population, stateId, parliament) VALUES('Puducherry', 500000, (select state_id from state where name like 'Puducherry'), 1);
