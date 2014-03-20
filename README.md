@@ -40,6 +40,7 @@ Clone application:
 
 Run Application:
 - After creation of database, in the application directory type 
+
 	> play run.
 - In your web browser open http://localhost:9000
 - The evolution will ask you to "Apply this script". Click on the "Apply this script" button.
@@ -47,8 +48,10 @@ Run Application:
 
  To populate the data tables do the following:
 - go to sql directory in the application directory
+
 	>cd sql	
 - login to mysql to polltoad database and source fullrun.sql
+
 	>mysql -p -u root
 	mysql>use polltoad
 	mysql>source fullrun.sql
