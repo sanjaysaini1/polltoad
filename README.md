@@ -53,8 +53,11 @@ Run Application:
 - login to mysql to polltoad database and source fullrun.sql
 
 	>mysql -p -u root
+
 	mysql>use polltoad
+
 	mysql>source fullrun.sql
+
 - You will get fully populated tables.
 
 On your web browser check http://localhost:9000/districts, you will see 647 districs. You can add by clicking add to add new districts.
