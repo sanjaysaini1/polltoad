@@ -36,6 +36,7 @@ change db.default.user to value of your choice and similar for db.default.passwo
 
 Clone application:
 - At command prompt run
+
 	> git clone https://github.com/sanjaysaini1/polltoad.git
 
 Run Application:
