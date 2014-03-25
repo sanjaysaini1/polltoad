@@ -8,23 +8,24 @@
 
 
 <ul class="nav nav-pills">
-  <li class="active"><a href="#tablediv" data-toggle="tab">Politicians</a></li>
-  <li><a href="#adddiv" data-toggle="tab">Add</a></li>
-  
+  <li class="active"><a href="#tablediv" data-toggle="tab">Politicians</a></li>  
 </ul>
 <div id='content' class="tab-content">
 <div class="tab-pane active" id="tablediv">
 <h2>@politicians.size politician(s)</h2>
 <table class="table">
-	<th>Name </th><th> Date of Birth </th> <th>Place of Birth </th><th>Political Party</th><th>Constituency</th>
-	<th>Education</th><th>Profession</th><th>Remove</th>
+	<th>#</th><th>Name </th><th> Date of Birth </th> <th>Place of Birth </th><th>Political Party</th><th>Constituency</th>
+	<th>Education</th><th>Profession</th>
 	@for(politician <- politicians) {
 	<tr>
+	<td>
+	@(politicians.indexOf(politician)+1)
+	</td>
 	<td>
 	@politician.person.name 
 	</td>
 	<td>
-		@politician.person.formattedDOB()
+		@politician.person.formattedDOB
     </td>
 	<td>
 		@politician.person.placeofbirth
@@ -42,39 +43,11 @@
     <td>
 		@politician.profession.profession
     </td>
-    <td>
-		@form(routes.Application.deletePolitician(politician.politicianId)) { <input
-		type="submit" value="Delete"> }
-		</td>
 	</tr> }
 </table>
 </div>
-<div class="tab-pane" id="adddiv">
-<h2>Add a new politician</h2>
-
-@form(routes.Application.newPolitician()) {
-	 
-<div>
-	@inputText(politicianForm("person.name"),'_label ->"Name",'_showConstraints -> false)
-
-   	@inputDate(politicianForm("person.dateofbirth"),'_label -> "Date of Birth",'_showConstraints -> false,'format->"dd/MM/yyyy")
-
-	@inputText(politicianForm("person.placeofbirth"),'_label -> "Place of Birth",'_showConstraints -> true)
 
 
-    @select(politicianForm("currentconstituency.constituencyId"),options(constituencies),'_label->"Choose Constituency (*)")
 
-	 @select(politicianForm("currentpoliticalparty.politicalPartyId"),options(politicalparties),'_label->"Choose Current Political Party (*)")
-
-	@inputText(politicianForm("education.education"),'_label ->"Qualification",'_showConstraints -> false)
-
-
-	@inputText(politicianForm("profession.profession"),'_label ->"Profession",'_showConstraints -> false)
-</div>
-
-<input type="submit" value="Create">
-
-} 
 }
-</div>
 </div>

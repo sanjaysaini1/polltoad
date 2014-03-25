@@ -12,6 +12,9 @@ import play.data.Form;
 import play.data.format.Formatters;
 import play.mvc.Controller;
 import play.mvc.Result;
+import securesocial.core.Identity;
+import securesocial.core.java.SecureSocial;
+import security.WithAdmin;
 
 public class Application extends Controller {
 
@@ -20,6 +23,7 @@ public class Application extends Controller {
 	static Form<District> districtForm = Form.form(District.class);
 	static Form<PoliticalParty> politicalpartyForm = Form.form(PoliticalParty.class);
 	static Form<Constituency> constituencyForm = Form.form(Constituency.class);
+
 	
 	public static Result index() {
 		return redirect(routes.Application.politicians());
@@ -28,16 +32,24 @@ public class Application extends Controller {
 	// politician
 	public static Result politicians() {
 		
-		return ok(views.html.politician.render(Politician.all(), Constituency.allMap(),PoliticalParty.allMap(),politicianForm));
+		
+		Identity user=(Identity)SecureSocial.currentUser();
+		System.out.println(user);
+		if(user!=null)
+		return ok(views.html.admin.politician.render(Politician.all(), Constituency.allMap(),PoliticalParty.allMap(),politicianForm));
+		else
+			return ok(views.html.politician.render(Politician.all(), Constituency.allMap(),PoliticalParty.allMap(),politicianForm));
 	}
 
+	
+	@SecureSocial.SecuredAction( authorization = WithAdmin.class, params = {})
 	public static Result newPolitician() {
 		Formatters.register(PoliticalParty.class, new Formatters.SimpleFormatter<PoliticalParty>() {
 
 			@Override
 			public PoliticalParty parse(String arg0, Locale arg1)
 					throws ParseException {
-				// TODO Auto-generated method stub
+			
 				PoliticalParty currentpoliticalParty=PoliticalParty.find.byId(new Long(arg0));
 				
 				return currentpoliticalParty;
@@ -53,28 +65,32 @@ public class Application extends Controller {
 		
 		Form<Politician> filledForm = politicianForm.bindFromRequest();
 		if (filledForm.hasErrors()) {
-			return badRequest(views.html.politician.render(Politician.all(), Constituency.allMap(),PoliticalParty.allMap(),filledForm));
+			return badRequest(views.html.admin.politician.render(Politician.all(), Constituency.allMap(),PoliticalParty.allMap(),filledForm));
 		} else {
 			Politician.create(filledForm.get());
 			return redirect(routes.Application.politicians());
 		}
 	}
-
+	 
 	public static Result deletePolitician(Long id) {
 		Politician.delete(id);
 		return redirect(routes.Application.politicians());
 	}
 
 	// states
-
 	public static Result states() {
-		return ok(views.html.state.render(State.all(), stateForm));
+		Identity user=(Identity)SecureSocial.currentUser();
+		if(user!=null)
+		return ok(views.html.admin.state.render(State.all(), stateForm));
+		else
+			return ok(views.html.state.render(State.all(), stateForm));
 	}
-
+	
+	@SecureSocial.SecuredAction( authorization = WithAdmin.class, params = {""})
 	public static Result newState() {
 		Form<State> filledForm = stateForm.bindFromRequest();
 		if (filledForm.hasErrors()) {
-			return badRequest(views.html.state.render(State.all(), filledForm));
+			return badRequest(views.html.admin.state.render(State.all(), filledForm));
 		} else {
 			State.create(filledForm.get());
 			return redirect(routes.Application.states());
@@ -88,19 +104,22 @@ public class Application extends Controller {
 
 	// districts
 	public static Result districts() {
-		return ok(views.html.district.render(District.all(), State.allMap(),
+		Identity user=(Identity)SecureSocial.currentUser();
+		if(user!=null)
+		return ok(views.html.admin.district.render(District.all(), State.allMap(),
 				districtForm));
+		else
+			return ok(views.html.district.render(District.all(), State.allMap(),
+					districtForm));
 	}
-
+	
+	@SecureSocial.SecuredAction( authorization = WithAdmin.class, params = {""})
 	public static Result newDistrict() {
 		Form<District> filledForm = districtForm.bindFromRequest();
 		if (filledForm.hasErrors()) {
-			// System.out.println("Bad request"+
-			// filledForm.errorsAsJson().toString());
-			//System.out.println("Bad request"+ filledForm.errorsAsJson().toString());
 			return badRequest(
 
-			views.html.district.render(District.all(), State.allMap(),
+			views.html.admin.district.render(District.all(), State.allMap(),
 					filledForm));
 		} else {
 			//System.out.println(filledForm.get().toString());
@@ -108,64 +127,66 @@ public class Application extends Controller {
 			return redirect(routes.Application.districts());
 		}
 	}
-
+	
+	@SecureSocial.SecuredAction( authorization = WithAdmin.class, params = {""})
 	public static Result deleteDistrict(Long id) {
 		District.delete(id);
 		return redirect(routes.Application.districts());
 	}
 
 	// political parties
-
 	public static Result politicalparties() {
-		return ok(views.html.politicalparty.render(PoliticalParty.all(),
-				politicalpartyForm));
-	}
 
+		Identity user=(Identity)SecureSocial.currentUser();
+		if(user!=null)
+		return ok(views.html.admin.politicalparty.render(PoliticalParty.all(),
+				politicalpartyForm));
+		else
+			return ok(views.html.politicalparty.render(PoliticalParty.all(),
+					politicalpartyForm));
+	}
+	
+	@SecureSocial.SecuredAction( authorization = WithAdmin.class, params = {})
 	public static Result newPoliticalparty() {
 		Form<PoliticalParty> filledForm = politicalpartyForm.bindFromRequest();
 		if (filledForm.hasErrors()) {
-			// System.out.println("Bad request"+
-			// filledForm.errorsAsJson().toString());
-			//System.out.println("Bad request"+ filledForm.errorsAsJson().toString());
-			return badRequest(
-
-			views.html.politicalparty.render(PoliticalParty.all(), filledForm));
+			return badRequest(views.html.admin.politicalparty.render(PoliticalParty.all(), filledForm));
 		} else {
-			//System.out.println(filledForm.get().toString());
 			PoliticalParty.create(filledForm.get());
 			return redirect(routes.Application.politicalparties());
 		}
 	}
-
+	
+	@SecureSocial.SecuredAction( authorization = WithAdmin.class, params = {""})
 	public static Result deletePoliticalparty(Long id) {
 		PoliticalParty.delete(id);
 		return redirect(routes.Application.politicalparties());
 	}
 	
 	//Constituency
-	
 	public static Result constituencies() {
-		return ok(views.html.constituency.render(Constituency.all(),State.allMap(),constituencyForm));
+		Identity user=(Identity)SecureSocial.currentUser();
+		if(user!=null)
+		return ok(views.html.admin.constituency.render(Constituency.all(),State.allMap(),constituencyForm));
+		else
+			return ok(views.html.constituency.render(Constituency.all(),State.allMap(),constituencyForm));
 	}
-
+	
+	@SecureSocial.SecuredAction( authorization = WithAdmin.class, params = {""})
 	public static Result newConstituency() {
 		Form<Constituency> filledForm = constituencyForm.bindFromRequest();
 		if (filledForm.hasErrors()) {
-			// System.out.println("Bad request"+
-			// filledForm.errorsAsJson().toString());
-			//System.out.println("Bad request"+ filledForm.errorsAsJson().toString());
-			return badRequest(
-
-			views.html.constituency.render(Constituency.all(),State.allMap(), filledForm));
+			return badRequest(	views.html.admin.constituency.render(Constituency.all(),State.allMap(), filledForm));
 		} else {
-			//System.out.println(filledForm.get().toString());
 			Constituency.create(filledForm.get());
 			return redirect(routes.Application.constituencies());
 		}
 	}
-
+	
+	@SecureSocial.SecuredAction( authorization = WithAdmin.class, params = {""})
 	public static Result deleteConstituency(Long id) {
 		Constituency.delete(id);
 		return redirect(routes.Application.constituencies());
 	}
+
 }

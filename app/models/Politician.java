@@ -1,7 +1,6 @@
 package models;
 
 import java.util.List;
-import java.util.logging.SimpleFormatter;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
@@ -11,7 +10,6 @@ import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 
-import play.data.format.Formatters;
 import play.data.validation.Constraints.Required;
 import play.db.ebean.Model;
 
