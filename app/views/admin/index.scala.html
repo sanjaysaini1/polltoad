@@ -1,0 +1,106 @@
+@(politicians: List[Politician], politicianForm: Form[Politician])
+
+@import helper._ 
+
+@main("Polltoad") {
+
+<h1>@politicians.size politician(s)</h1>
+
+<ul>
+	Name &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; Constituency @for(politician <-
+	politicians) {
+	<li>@politician.person.name &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+		@politician.constituency
+
+		@form(routes.Application.deletePolitician(politician.politicianId)) { <input
+		type="submit" value="Delete"> }
+	</li> }
+</ul>
+
+<h2>Add a new politician</h2>
+
+@form(routes.Application.newPolitician()) {
+
+
+<h2>Personal Details</h2> 
+<div>
+	@inputText(politicianForm("person.name"),'_label ->"Name",'_showConstraints -> false)
+
+   	@inputDate(politicianForm("person.dateofbirth"),'_label -> "Date of Birth",'_showConstraints -> false,'format->"dd/MM/yyyy")
+
+	@inputText(politicianForm("person.placeofbirth"),'_label -> "Place of Birth",'_showConstraints -> true)
+
+</div>
+<h2>Past Constituencies</h2> 
+<div>
+	@repeat(politicianForm("constituency"), min = 2) { constituency =>
+
+		@inputText(constituency("name"),'_label -> "Constituency Name")
+
+		@inputText(constituency("state"),'_label -> "Constituency State")
+
+		@inputText(constituency("population"),'_label -> "Constituency Population") }
+</div>
+<h2>Current Constituency</h2> 
+<div>
+	@inputText(politicianForm("currentconstituency.name"),'_label ->"Current Constituency",'_showConstraints -> false)
+
+	@inputText(politicianForm("currentconstituency.state"),'_label ->"State",'_showConstraints -> false)
+
+	@inputText(politicianForm("currentconstituency.population"),'_label ->"Population",'_showConstraints -> false)
+</div>
+<h2>Elections Fought</h2> 
+<div>
+	@repeat(politicianForm("electionsfaught"), min = 2) { electionsfaught =>
+
+		@inputDate(electionsfaught("Date"),'_label -> "Election Date")
+
+		@inputText(electionsfaught("constituency.name"),'_label -> "Election Constituency") 
+		@inputText(electionsfaught("constituency.state"),'_label -> "State") }
+</div>
+
+<h2>Previous Political Parties</h2>
+<div> 
+		@repeat(politicianForm("politicalparties"), min = 2) {politicalparties => 
+		@inputText(politicalparties("name"),'_label ->"Party Name") }
+</div>
+<h2>Current Political Party</h2>
+<div> 
+	@inputText(politicianForm("currentpoliticalparty.name"),'_label ->"Current Party",'_showConstraints -> false)
+</div>
+
+<h2>Education</h2>
+<div> 
+	@inputText(politicianForm("education.education"),'_label ->"Qualification",'_showConstraints -> false)
+
+</div>
+
+<h2>Family</h2>
+<div> 
+		
+	   @repeat(politicianForm("family.member"), min = 2) { member=>
+     	
+		@inputText(member("name"),'_label ->"Name",'_showConstraints -> false)
+
+   		@inputDate(member("dateofbirth"),'_label -> "Date of Birth",'_showConstraints -> false,'format->"dd/MM/yyyy")
+
+		@inputText(member("placeofbirth"),'_label -> "Place of Birth",'_showConstraints -> true)
+	}
+</div>
+
+<h2>Profession</h2>
+<div> 
+	@inputText(politicianForm("profession.profession"),'_label ->"Profession",'_showConstraints -> false)
+</div>
+
+<h2>Media</h2>
+<div> 
+@inputText(politicianForm("media.name"),'_label ->"Name",'_showConstraints -> false)
+
+@inputText(politicianForm("media.impact"),'_label ->"impact",'_showConstraints -> false)
+
+</div>
+<input type="submit" value="Create">
+
+} 
+}

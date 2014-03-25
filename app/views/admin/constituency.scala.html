@@ -1,0 +1,64 @@
+@(constituencies: List[Constituency],states: Map[String,String], constituencyForm: Form[Constituency])
+
+@import helper._ 
+@import helper.twitterBootstrap._
+
+@main("Polltoad-Constituency") {
+<ul class="nav nav-pills">
+  <li class="active"><a href="#tablediv" data-toggle="tab">Constituencies</a></li>
+  <li><a href="#adddiv" data-toggle="tab">Add</a></li>
+</ul>
+<div id='content' class="tab-content">
+<div class="tab-pane active" id="tablediv">
+<h2>@constituencies.size Constituency(s)</h2>
+
+<table class="table">
+
+   <th>
+	Name </th> <th> State</th><th>Type</th><th>Remove</th>
+	 @for(constituency <-	constituencies) {
+	 <tr>
+	 <td>
+	@constituency.name
+     </td>
+     <td>
+	    @constituency.state.name
+	 </td>
+	 <td>
+	 @if(constituency.parliament){
+	     Parliamentary
+	    }else{
+	     Assembly
+	    }
+	
+	 </td>
+	 <td>
+		@form(routes.Application.deleteConstituency(constituency.constituencyId)) { <input
+		type="submit" value="Delete"> }
+	</td>
+	</tr>}
+
+</table>
+</div>
+<div  class="tab-pane" id="adddiv">
+<h2>Add a new constituency</h2>
+
+@form(routes.Application.newConstituency()) {
+<div>
+
+	@inputText(constituencyForm("name"),'_label ->"Name",'_showConstraints -> false)
+	
+	@inputText(constituencyForm("population"),'_label ->"Voter Population",'_showConstraints -> false)
+
+    @select(constituencyForm("state.stateId"),options(states),'_label->"Choose State (*)")
+    
+   @checkbox(field=constituencyForm("parliament"),'_label ->"Parliamentary constituency")
+
+</div>
+
+<input type="submit" value="Create">
+
+} 
+}
+</div>
+</div>

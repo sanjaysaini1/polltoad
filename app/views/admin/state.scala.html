@@ -1,0 +1,54 @@
+@(states: List[State], stateForm: Form[State])
+
+@import helper._ 
+@import helper.twitterBootstrap._
+
+@main("Polltoad-State") {
+<ul class="nav nav-pills">
+  <li class="active"><a href="#tablediv" data-toggle="tab">States</a></li>
+  <li><a href="#adddiv" data-toggle="tab">Add</a></li>
+  
+</ul>
+<div id='content' class="tab-content">
+<div class="tab-pane active" id="tablediv">
+
+<h2>@states.size State(s) and UT(s)</h2>
+
+
+<table class="table">
+   <th>Type</th><th>Name</th><th>Remove</th>
+   
+	  @for(state <-	states) {
+	  <tr>
+	  <td>
+	  @if(state.ut) {UT} else {State}
+	  </td>
+	  <td>
+		@state.name
+	  </td>
+	  <td>
+		@form(routes.Application.deleteState(state.stateId)) { <input
+		type="submit" value="Delete"> }
+		</td>
+	</tr> }
+
+</table>
+</div>
+<div  class="tab-pane" id="adddiv">
+<h2>Add a new state</h2>
+
+@form(routes.Application.newState()) {
+
+<div>
+	@inputText(stateForm("name"),'_label ->"Name",'_showConstraints -> false)
+
+    @checkbox(field=stateForm("ut"),'_label ->"UT")
+
+</div>
+
+<input type="submit" value="Create">
+
+} 
+}
+</div>
+</div>

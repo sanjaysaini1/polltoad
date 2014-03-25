@@ -1,0 +1,55 @@
+@(title: String)(content: Html)
+
+<!DOCTYPE html>
+
+<html>
+    <head>
+        <title>@title</title>
+        <link rel="stylesheet" media="screen" href="@routes.Assets.at("stylesheets/main.css")">
+         <link rel="stylesheet" media="screen" href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css">
+        <link rel="shortcut icon" type="image/png" href="@routes.Assets.at("images/favicon.png")">
+        <script src="@routes.Assets.at("javascripts/jquery-1.9.0.min.js")" type="text/javascript"></script>
+         <script src="//netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js" type="text/javascript"></script>
+    </head>
+    <body>
+    <div class="container">
+    <div id="header">
+    <div id="menu">
+    <div class="navbar navbar-default navbar-fixed-top" role="navigation">
+    <div class="container">
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand" href="politicians">Polltoad</a>
+        </div>
+        <div class="navbar-collapse collapse">
+          <ul class="nav navbar-nav navbar-right">
+           <li ><a href="logout">Logout</a></li>
+            <li ><a href="politicians">Politicians</a></li>
+            <li><a href="politicalparties">Political Parties</a></li>
+            <li><a href="states">States</a></li>
+            <li><a href="districts">Districts</a></li>
+            <li><a href="constituencies">Constituency</a></li>
+          </ul>
+        </div><!--/.nav-collapse -->
+      </div>
+    </div>
+    </div>
+    </div>
+    </div>
+    	<br/><br/><br/><br/>
+    	<div class="container">
+        <div id="content">
+        @content
+        </br>
+        </div>
+        </div>
+     <div id="footer">
+     </div>
+     </div>
+    </body>
+</html>
