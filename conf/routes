@@ -28,29 +28,29 @@ POST    /authenticate/:provider     securesocial.controllers.ProviderController.
 GET     /not-authorized             securesocial.controllers.ProviderController.notAuthorized
 
 # Tasks          
-GET     /politicians                  controllers.Application.politicians()
-POST    /politicians                  controllers.Application.newPolitician()
-POST    /politicians/:id/delete       controllers.Application.deletePolitician(id: Long)
+GET     /politicians                  controllers.PoliticianController.politicians()
+POST    /politicians                  controllers.PoliticianController.newPolitician()
+POST    /politicians/:id/delete       controllers.PoliticianController.deletePolitician(id: Long)
 
 # Tasks          
-GET     /states                       controllers.Application.states()
-POST    /states                  	  controllers.Application.newState()
-POST    /states/:id/delete      	  controllers.Application.deleteState(id: Long)
+GET     /states                       controllers.StateController.states()
+POST    /states                  	  controllers.StateController.newState()
+POST    /states/:id/delete      	  controllers.StateController.deleteState(id: Long)
 
 # Tasks          
-GET     /districts                    controllers.Application.districts()
-POST    /districts                    controllers.Application.newDistrict()
-POST    /districts/:id/delete         controllers.Application.deleteDistrict(id: Long)
+GET     /districts                    controllers.DistrictController.districts()
+POST    /districts                    controllers.DistrictController.newDistrict()
+POST    /districts/:id/delete         controllers.DistrictController.deleteDistrict(id: Long)
 
 # Tasks          
-GET     /politicalparties                    controllers.Application.politicalparties()
-POST    /politicalparties                    controllers.Application.newPoliticalparty()
-POST    /politicalparties/:id/delete         controllers.Application.deletePoliticalparty(id: Long)
+GET     /politicalparties                    controllers.PoliticalPartyController.politicalparties()
+POST    /politicalparties                    controllers.PoliticalPartyController.newPoliticalparty()
+POST    /politicalparties/:id/delete         controllers.PoliticalPartyController.deletePoliticalparty(id: Long)
 
 # Tasks          
-GET     /constituencies                    controllers.Application.constituencies()
-POST    /constituencies                    controllers.Application.newConstituency()
-POST    /constituencies/:id/delete         controllers.Application.deleteConstituency(id: Long)
+GET     /constituencies                    controllers.ConstituencyController.constituencies()
+POST    /constituencies                    controllers.ConstituencyController.newConstituency()
+POST    /constituencies/:id/delete         controllers.ConstituencyController.deleteConstituency(id: Long)
 
 # Map static resources from the /public folder to the /assets URL path
 GET     /assets/*file               controllers.Assets.at(path="/public", file)

@@ -27,7 +27,7 @@
 		@state.name
 	  </td>
 	  <td>
-		@form(routes.Application.deleteState(state.stateId)) { <input
+		@form(routes.StateController.deleteState(state.stateId)) { <input
 		type="submit" value="Delete"> }
 		</td>
 	</tr> }
@@ -37,7 +37,7 @@
 <div  class="tab-pane" id="adddiv">
 <h2>Add a new state</h2>
 
-@form(routes.Application.newState()) {
+@form(routes.StateController.newState()) {
 
 <div>
 	@inputText(stateForm("name"),'_label ->"Name",'_showConstraints -> false)

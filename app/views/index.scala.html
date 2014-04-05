@@ -12,14 +12,14 @@
 	<li>@politician.person.name &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
 		@politician.constituency
 
-		@form(routes.Application.deletePolitician(politician.politicianId)) { <input
+		@form(routes.PoliticianController.deletePolitician(politician.politicianId)) { <input
 		type="submit" value="Delete"> }
 	</li> }
 </ul>
 
 <h2>Add a new politician</h2>
 
-@form(routes.Application.newPolitician()) {
+@form(routes.PoliticianController.newPolitician()) {
 
 
 <h2>Personal Details</h2> 

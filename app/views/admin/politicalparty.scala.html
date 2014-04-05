@@ -32,7 +32,7 @@
 	@politicalparty.name
 	</td>   
 	<td>
-		@form(routes.Application.deletePoliticalparty(politicalparty.politicalPartyId)) { <input
+		@form(routes.PoliticalPartyController.deletePoliticalparty(politicalparty.politicalPartyId)) { <input
 		type="submit" value="Delete"> }
 	</td>
 	 </tr>
@@ -43,7 +43,7 @@
 <div class="tab-pane" id="adddiv">
 <h2>Add a new Political Party</h2>
 
-@form(routes.Application.newPoliticalparty()) {
+@form(routes.PoliticalPartyController.newPoliticalparty()) {
 
 <div>
 	@inputText(politicalpartyForm("name"),'_label ->"Name",'_showConstraints -> false)

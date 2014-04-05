@@ -33,7 +33,7 @@
 	
 	 </td>
 	 <td>
-		@form(routes.Application.deleteConstituency(constituency.constituencyId)) { <input
+		@form(routes.ConstituencyController.deleteConstituency(constituency.constituencyId)) { <input
 		type="submit" value="Delete"> }
 	</td>
 	</tr>}
@@ -43,7 +43,7 @@
 <div  class="tab-pane" id="adddiv">
 <h2>Add a new constituency</h2>
 
-@form(routes.Application.newConstituency()) {
+@form(routes.ConstituencyController.newConstituency()) {
 <div>
 
 	@inputText(constituencyForm("name"),'_label ->"Name",'_showConstraints -> false)

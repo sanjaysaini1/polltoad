@@ -46,7 +46,7 @@
     </td>
  
     <td>
-		@form(routes.Application.deletePolitician(politician.politicianId)) { <input
+		@form(routes.PoliticianController.deletePolitician(politician.politicianId)) { <input
 		type="submit" value="Delete"> }
 		</td>
 	</tr> }
@@ -56,7 +56,7 @@
 <div class="tab-pane" id="adddiv">
 <h2>Add a new politician</h2>
 
-@form(routes.Application.newPolitician()) {
+@form(routes.PoliticianController.newPolitician()) {
 	 
 <div>
 	@inputText(politicianForm("person.name"),'_label ->"Name",'_showConstraints -> false)
